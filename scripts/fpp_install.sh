@@ -28,6 +28,51 @@ fi
 set -eu
 
 
+# Self-heal the git origin after the GitHub repo rename
+# (OnlineDynamic/Statistics-Fpp-Plugin -> OnlineDynamic/fpp-plugin-AdvancedStats).
+#
+# The plugin directory name never changed - FPP clones into ${PLUGINDIR}/<repoName>
+# and repoName has always been fpp-plugin-AdvancedStats - so there is no data to
+# migrate. The only stale artifact in an existing install is origin, which still
+# names the old repo and keeps working purely because GitHub redirects renamed
+# repos. That redirect vanishes the instant the old name is reclaimed by anyone,
+# and old clones would then fail to pull or, worse, silently start pulling from
+# whatever repo took the name. Rewrite it here, while the redirect still works,
+# so the upgrade path stops depending on it.
+#
+# FPP runs this script after 'git pull' on every upgrade (upgrade_plugin resolves
+# scripts/fpp_install.sh as its post-pull script), so existing installs fix
+# themselves on their next upgrade.
+#
+# Scoped to the exact old owner/repo so forks, SSH remotes and hand-edited
+# remotes are left alone, and the path is rewritten in place so an embedded
+# GitHub credential (FPP's InjectGitHubCredentials may have put one there at
+# clone time) survives. Never fatal: an install must not fail over this.
+OLD_REPO_PATH="/OnlineDynamic/Statistics-Fpp-Plugin"
+current_origin=$(git -C "$PLUGIN_DIR" remote get-url origin 2>/dev/null || true)
+
+case "$current_origin" in
+    https://github.com${OLD_REPO_PATH}|https://github.com${OLD_REPO_PATH}.git|\
+    https://*@github.com${OLD_REPO_PATH}|https://*@github.com${OLD_REPO_PATH}.git)
+        new_origin="${current_origin%.git}"
+        new_origin="${new_origin%${OLD_REPO_PATH}}/OnlineDynamic/fpp-plugin-AdvancedStats.git"
+
+        # Strip any embedded credential before echoing - this output is streamed
+        # to the browser and appended to logs/fpp_plugin_manager.log.
+        safe_origin=$(echo "$new_origin" | sed -E 's#(https://)[^/@]+@#\1#')
+
+        if git -C "$PLUGIN_DIR" remote set-url origin "$new_origin" 2>/dev/null; then
+            echo "Repository was renamed - updated git origin to ${safe_origin}"
+            # git rewrote .git/config as root; hand it back so the fpp user's own
+            # git operations in the plugin directory keep working.
+            chown fpp:fpp "${PLUGIN_DIR}/.git/config" 2>/dev/null || true
+        else
+            echo "Warning: could not update git origin; still relying on GitHub's rename redirect" >&2
+        fi
+        ;;
+esac
+
+
 # Create log file with proper permissions. The name must match the one every
 # writer uses (postStart.sh, preStop.sh, functions.inc.php, mqtt_listener.py,
 # callbacks.py) - a case mismatch here provisions a file nothing writes to and
