@@ -23,11 +23,23 @@ global $pluginSettings;
 return isset($pluginSettings[$key]) ? $pluginSettings[$key] : $default;
 }
 
+// Timeouts (seconds) for calls to the local FPP API, so a hung or
+// unresponsive fppd can't stall the page/hook that triggered the call.
+define('ADVANCEDSTATS_API_CONNECT_TIMEOUT', 2);
+define('ADVANCEDSTATS_API_TIMEOUT', 5);
+
+// Apply the standard timeouts to a curl handle
+function advancedstats_setCurlTimeouts($ch) {
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, ADVANCEDSTATS_API_CONNECT_TIMEOUT);
+curl_setopt($ch, CURLOPT_TIMEOUT, ADVANCEDSTATS_API_TIMEOUT);
+}
+
 // Get all playlists from FPP
 function advancedstats_getPlaylistsFromFPP() {
 $ch = curl_init('http://localhost/api/playlists');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HEADER, 0);
+advancedstats_setCurlTimeouts($ch);
 $data = curl_exec($ch);
 curl_close($ch);
 $result = json_decode($data, true);
@@ -43,6 +55,7 @@ function advancedstats_getFPPStatus() {
 $ch = curl_init('http://localhost/api/fppd/status');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HEADER, 0);
+advancedstats_setCurlTimeouts($ch);
 $data = curl_exec($ch);
 curl_close($ch);
 return json_decode($data, true);
@@ -67,6 +80,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+advancedstats_setCurlTimeouts($ch);
 $response = curl_exec($ch);
 curl_close($ch);
 
@@ -81,6 +95,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+advancedstats_setCurlTimeouts($ch);
 $response = curl_exec($ch);
 curl_close($ch);
 
@@ -104,6 +119,7 @@ if ($level > 100) $level = 100;
 $ch = curl_init('http://localhost/api/system/brightness/' . $level);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+advancedstats_setCurlTimeouts($ch);
 $response = curl_exec($ch);
 curl_close($ch);
 

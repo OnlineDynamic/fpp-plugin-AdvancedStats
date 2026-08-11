@@ -158,8 +158,8 @@ Returns the last 20 git commits for the plugin (useful for changelog display).
 
 **Resources:**
 
-- [GitHub Repository](https://github.com/OnlineDynamic/Statistics-Fpp-Plugin)
-- [Bug Reports & Feature Requests](https://github.com/OnlineDynamic/Statistics-Fpp-Plugin/issues)
+- [GitHub Repository](https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats)
+- [Bug Reports & Feature Requests](https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats/issues)
 
 ## License
 

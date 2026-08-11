@@ -1276,7 +1276,7 @@ curl -X POST http://192.168.1.200/api/plugin/fpp-plugin-AdvancedStats/archive-ol
             <h3>Getting Additional Help</h3>
             <p>If you continue to experience issues:</p>
             <ul>
-                <li><strong>GitHub Issues:</strong> <a href="https://github.com/OnlineDynamic/Statistics-Fpp-Plugin/issues" target="_blank">Report bugs or request features</a></li>
+                <li><strong>GitHub Issues:</strong> <a href="https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats/issues" target="_blank">Report bugs or request features</a></li>
                 <li><strong>FPP Forums:</strong> Post in the FPP community forums with detailed information</li>
                 <li><strong>FPP Discord:</strong> Join the FPP Discord server for real-time help</li>
                 <li><strong>System Logs:</strong> Check <code>/var/log/fpp/fpp.log</code> for error messages</li>
@@ -1321,7 +1321,7 @@ curl http://localhost/api/plugin/fpp-plugin-AdvancedStats/status
                     If you encounter problems or have feature requests, please report them on GitHub:
                 </p>
                 <p style="text-align: center; margin: 15px 0;">
-                    <a href="https://github.com/OnlineDynamic/Statistics-Fpp-Plugin/issues/new" target="_blank" class="action-btn success">
+                    <a href="https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats/issues/new" target="_blank" class="action-btn success">
                         <i class="fab fa-github"></i> Open GitHub Issues
                     </a>
                 </p>
@@ -1448,7 +1448,7 @@ ${systemConfigDataAdvStats}
 `;
                     
                     const encodedBody = encodeURIComponent(issueTemplate);
-                    const issueUrl = `https://github.com/OnlineDynamic/Statistics-Fpp-Plugin/issues/new?body=${encodedBody}`;
+                    const issueUrl = `https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats/issues/new?body=${encodedBody}`;
                     
                     window.open(issueUrl, '_blank');
                 }
@@ -1588,10 +1588,10 @@ ${systemConfigDataAdvStats}
                     
                     <p style="margin-top: 20px;"><strong>Resources:</strong></p>
                     <ul style="margin-left: 20px;">
-                        <li><a href='https://github.com/OnlineDynamic/Statistics-Fpp-Plugin' target='_blank'>
+                        <li><a href='https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats' target='_blank'>
                             <i class="fas fa-code-branch"></i> Git Repository
                         </a></li>
-                        <li><a href='https://github.com/OnlineDynamic/Statistics-Fpp-Plugin/issues' target='_blank'>
+                        <li><a href='https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats/issues' target='_blank'>
                             <i class="fas fa-bug"></i> Bug Reporter / Feature Requests
                         </a></li>
                     </ul>

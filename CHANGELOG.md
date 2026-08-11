@@ -26,4 +26,4 @@ This plugin is actively developed and maintained. For the latest updates:
 
 ---
 
-For detailed version history, see the git commit log or visit the [GitHub repository](https://github.com/OnlineDynamic/Statistics-Fpp-Plugin).
+For detailed version history, see the git commit log or visit the [GitHub repository](https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats).

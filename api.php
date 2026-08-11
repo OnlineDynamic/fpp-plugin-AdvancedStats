@@ -1764,8 +1764,12 @@ function advancedStatsSystemDiagnostics() {
         $diagnostics = "=== ADVANCED STATS PLUGIN - SYSTEM DIAGNOSTICS ===\n";
         $diagnostics .= "Generated: " . date('Y-m-d H:i:s T') . "\n\n";
         
-        // Get system info from FPP API
-        $systemInfoJson = @file_get_contents('http://127.0.0.1/api/system/info');
+        // Get system info from FPP API (bounded, so an unresponsive fppd
+        // can't hang the diagnostics request)
+        $systemInfoContext = stream_context_create(array(
+            'http' => array('timeout' => 5),
+        ));
+        $systemInfoJson = @file_get_contents('http://127.0.0.1/api/system/info', false, $systemInfoContext);
         $systemInfo = array();
         if ($systemInfoJson !== false) {
             $systemInfo = json_decode($systemInfoJson, true);
