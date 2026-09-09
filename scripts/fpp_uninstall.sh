@@ -15,11 +15,14 @@ echo "Uninstalling Advanced Stats Plugin..."
 # 1. Stop the MQTT listener started by scripts/postStart.sh.
 #    FPP does not run preStop.sh on uninstall, so without this the process
 #    keeps running (against a since-deleted script) until the next fppd stop.
-if pgrep -f "mqtt_listener.py" >/dev/null 2>&1; then
+#    The pattern includes the plugin directory so it cannot match an
+#    unrelated process that happens to be named mqtt_listener.py.
+LISTENER_MATCH="${PLUGIN}/mqtt_listener.py"
+if pgrep -f "${LISTENER_MATCH}" >/dev/null 2>&1; then
     echo "Stopping MQTT listener..."
-    pkill -f "mqtt_listener.py" 2>/dev/null || true
+    pkill -f "${LISTENER_MATCH}" 2>/dev/null || true
     sleep 1
-    pkill -9 -f "mqtt_listener.py" 2>/dev/null || true
+    pkill -9 -f "${LISTENER_MATCH}" 2>/dev/null || true
 fi
 
 # 2. SQLite database, its journal/WAL sidecars, and any safety-backup copies

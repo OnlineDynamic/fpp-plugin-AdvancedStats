@@ -9,7 +9,7 @@ LOG_FILE="/home/fpp/media/logs/fpp-plugin-AdvancedStats.log"
 echo "Stopping Advanced Stats MQTT listener..." >> "$LOG_FILE"
 
 # Find and kill the MQTT listener process
-pkill -f "mqtt_listener.py"
+pkill -f "fpp-plugin-AdvancedStats/mqtt_listener.py"
 
 if [ $? -eq 0 ]; then
     echo "MQTT listener stopped successfully" >> "$LOG_FILE"
