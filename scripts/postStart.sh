@@ -47,7 +47,7 @@ sys.exit(0 if rc == 0 else 1)' "$mqtt_host" "$mqtt_port" 2>/dev/null; then
 }
 
 # Check if MQTT listener is already running
-if pgrep -f "mqtt_listener.py" > /dev/null; then
+if pgrep -f "$MQTT_LISTENER" > /dev/null; then
     echo "MQTT listener already running" >> "$LOG_FILE"
 else
     # Make sure the script is executable
@@ -59,7 +59,7 @@ else
         trap '' HUP
         wait_for_broker
         # Re-check: another postStart may have won the race while we waited
-        if pgrep -f "mqtt_listener.py" > /dev/null; then
+        if pgrep -f "$MQTT_LISTENER" > /dev/null; then
             echo "MQTT listener already running - not starting a second one"
             exit 0
         fi
