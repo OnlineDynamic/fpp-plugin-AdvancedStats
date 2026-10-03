@@ -1,25 +1,35 @@
 {
-	"repoName": "fpp-plugin-AdvancedStats",
-	"name": "Advanced Stats Plugin",
-	"author": "Stuart Ledingham (onlinedynamic)",
-	"description": "Comprehensive analytics & monitoring for FPP - Track sequences, playlists, GPIO events, commands & presets in real-time. Features interactive dashboards, heat maps, live event monitoring, searchable history, automatic archiving, and full REST API. Identify usage patterns, optimize show scheduling, and gain deep insights into your light show operations. Requires MQTT broker enabled.",
-	"homeURL": "https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats",
-	"srcURL": "https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats.git",
-	"bugURL": "https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats/issues",
-	"iconURL": "https://raw.githubusercontent.com/OnlineDynamic/fpp-plugin-AdvancedStats/master/icon.png",
-	"allowUpdates": 1,
-	"versions": [
-		{
-			"minFPPVersion": "10.0",
-			"maxFPPVersion": "0",
-			"branch": "master",
-			"sha": ""
-		},
-		{
-			"minFPPVersion": "9.0",
-			"maxFPPVersion": "0",
-			"branch": "master",
-			"sha": "682a0e88322b4013f02f0a6ec93715694fc4eb4e"
-		}
-	]
+    "repoName": "fpp-plugin-AdvancedStats",
+    "name": "Advanced Stats Plugin",
+    "author": "Stuart Ledingham (onlinedynamic)",
+    "description": "Comprehensive analytics & monitoring for FPP - Track sequences, playlists, GPIO events, commands & presets in real-time. Features interactive dashboards, heat maps, live event monitoring, searchable history, automatic archiving, and full REST API. Identify usage patterns, optimize show scheduling, and gain deep insights into your light show operations. Requires MQTT broker enabled.",
+    "homeURL": "https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats",
+    "srcURL": "https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats.git",
+    "bugURL": "https://github.com/OnlineDynamic/fpp-plugin-AdvancedStats/issues",
+    "iconURL": "https://raw.githubusercontent.com/OnlineDynamic/fpp-plugin-AdvancedStats/master/icon.png",
+    "allowUpdates": 1,
+    "versions": [
+        {
+            "minFPPVersion": "10.0",
+            "maxFPPVersion": "0",
+            "branch": "master",
+            "sha": ""
+        },
+        {
+            "minFPPVersion": "9.0",
+            "maxFPPVersion": "0",
+            "branch": "master",
+            "sha": "682a0e88322b4013f02f0a6ec93715694fc4eb4e"
+        }
+    ],
+    "privacy": {
+        "summary": "Runs on this device only",
+        "sends": [],
+        "collects": [],
+        "sensors": [],
+        "remoteAccess": "lan",
+        "systemChanges": [],
+        "closedCode": false,
+        "other": "none"
+    }
 }
